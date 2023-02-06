@@ -6,11 +6,13 @@ public class Mage extends Job{
 
     @Override
     public int modifier(Stat stat) {
-        if (stat instanceof Intelligence)
-            return stat.getValue()+intelligenceBoost;
-        if (stat instanceof Dexterity)
-            return stat.getValue()+dexterityBoost;
-        return stat.getValue();
+        if (stat instanceof Dexterity) {
+            return dexterityBoost;
+        }
+        if (stat instanceof Intelligence) {
+            return intelligenceBoost;
+        }
+        else return 0;
     }
 
     private final int intelligenceBoost = 4;

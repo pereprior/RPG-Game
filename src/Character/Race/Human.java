@@ -6,13 +6,16 @@ public class Human extends Race{
 
     @Override
     public int modifier(Stat stat) {
-        if (stat instanceof Dexterity)
-            return stat.getValue()+dexterityBoost;
-        if (stat instanceof Strength)
-            return stat.getValue()+strengthBoost;
-        if (stat instanceof Constitution)
-            return stat.getValue()+constitutionBoost;
-        else return stat.getValue();
+        if (stat instanceof Dexterity) {
+            return dexterityBoost;
+        }
+        if (stat instanceof Strength) {
+            return strengthBoost;
+        }
+        if (stat instanceof Constitution) {
+            return constitutionBoost;
+        }
+        else return 0;
     }
 
     private final int dexterityBoost = 1;

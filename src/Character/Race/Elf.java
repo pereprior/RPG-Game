@@ -6,13 +6,16 @@ public class Elf extends Race{
 
     @Override
     public int modifier(Stat stat) {
-        if (stat instanceof Dexterity)
-            return stat.getValue()+dexterityBoost;
-        if (stat instanceof Strength)
-            return stat.getValue()+strengthBoost;
-        if (stat instanceof Intelligence)
-            return stat.getValue()+intelligenceBoost;
-        else return stat.getValue();
+        if (stat instanceof Dexterity) {
+            return dexterityBoost;
+        }
+        if (stat instanceof Strength) {
+            return strengthBoost;
+        }
+        if (stat instanceof Intelligence) {
+            return intelligenceBoost;
+        }
+        else return 0;
     }
 
     private final int dexterityBoost = 3;

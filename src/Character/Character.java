@@ -4,37 +4,75 @@ import Character.Job.*;
 import Character.Race.*;
 import Character.Stat.*;
 
-public class Character {
+public class Character implements IDamageable{
 
-    public Character(String name, Race race, Job job, Stat stat){
-        statBase=stat.getValue();
+    public Character(String name, Race race, Job job, Stat base){
         this.name=name;
         this.race=race;
         this.job=job;
-        this.strength=stat;
-        this.dexterity=stat;
-        this.constitution=stat;
-        this.intelligence=stat;
+        this.strength= new Strength(base.getValue());
+        this.dexterity= new Dexterity(base.getValue());
+        this.constitution= new Constitution(base.getValue());
+        this.intelligence= new Intelligence(base.getValue());
+        setStats();
+    }
+
+    public void setStats(){
+        strength.setValue(statBoost(strength));
+        dexterity.setValue(statBoost(dexterity));
+        constitution.setValue(statBoost(constitution));
+        intelligence.setValue(statBoost(intelligence));
         velocity();
         power();
         magic();
+        maxHealth();
+    }
+
+    public int statBoost(Stat stat) {
+        return stat.getValue() + race.modifier(stat) + job.modifier(stat);
     }
 
     public double velocity(){
-        return race.modifier(dexterity)+job.modifier(dexterity)-statBase;
+        return dexterity.getValue()*2;
     }
 
     public double power(){
-        return race.modifier(strength)+job.modifier(strength)-statBase;
+        return strength.getValue()*2;
     }
 
     public double magic(){
-        return race.modifier(intelligence)+job.modifier(intelligence)-statBase;
+        return intelligence.getValue()*2;
     }
 
     @Override
     public String toString(){
-        return "My name is " + name + ". I'm an " + race.toString() + " " + job.toString() + ". My stats are: " + "\nStrength: " + strength.getValue() + " - Dexterity: " + dexterity.getValue() + " - Constitution: " + constitution.getValue() + " - Intelligence: " + intelligence.getValue() + " - Velocity: " + velocity() + " - Power: " + power() + " - Magic: " + magic();
+        return "My name is " + name + ". I'm an " + race.toString() + " " + job.toString() + ". My stats are: " + "\nStrength: " + strength.getValue() + " - Dexterity: " + dexterity.getValue() + " - Constitution: " + constitution.getValue() + " - Intelligence: " + intelligence.getValue() + "\nVelocity: " + velocity() + " - Power: " + power() + " - Magic: " + magic()+ " - Health: " + health();
+    }
+
+    @Override
+    public double maxHealth() {
+        health = constitution.getValue()*25;
+        return health;
+    }
+
+    @Override
+    public double health() {
+        return health;
+    }
+
+    @Override
+    public boolean isDead() {
+        return health > 0;
+    }
+
+    @Override
+    public void receivesDamage(double amount) {
+        health = health-amount;
+    }
+
+    @Override
+    public void heals(double amount) {
+        health = health+amount;
     }
 
     public String getName() {
@@ -50,7 +88,6 @@ public class Character {
     }
 
 
-    private int statBase;
     private String name;
     private Race race;
     private Job job;
@@ -58,5 +95,5 @@ public class Character {
     private Stat dexterity;
     private Stat constitution;
     private Stat intelligence;
-
+    private double health;
 }
