@@ -2,7 +2,7 @@ package Character;
 
 public interface IDamageable {
 
-    double maxHealth();
+    void maxHealth();
     double health();
     boolean isDead();
     void receivesDamage(double amount);

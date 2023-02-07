@@ -3,6 +3,8 @@ package Character;
 import Character.Job.*;
 import Character.Race.*;
 import Character.Stat.*;
+import Item.Food.Food;
+import Item.Food.IConsumable;
 
 public class Character implements IDamageable{
 
@@ -50,9 +52,14 @@ public class Character implements IDamageable{
     }
 
     @Override
-    public double maxHealth() {
-        health = constitution.getValue()*25;
-        return health;
+    public void maxHealth() {
+        setHealth(constitution.getValue()*25);
+        maxHealth=health;
+    }
+
+    public void consumes(Food food){
+        System.out.println(name + " consumed: " + food);
+        //heals(food);
     }
 
     @Override
@@ -67,12 +74,20 @@ public class Character implements IDamageable{
 
     @Override
     public void receivesDamage(double amount) {
-        health = health-amount;
+        setHealth(health-amount);
+        System.out.println(name + " received " + amount + " damage. Health: " + health + "/" + maxHealth);
     }
 
     @Override
     public void heals(double amount) {
-        health = health+amount;
+        double cure = health+amount;
+        if (cure < maxHealth){
+            setHealth(cure);
+            System.out.println(name + " healed " + amount + " life. Health: " + health + "/" + maxHealth);
+        }else{
+            System.out.println(name + " healed " + (maxHealth-health) + " life. Health: " + maxHealth + "/" + maxHealth);
+            setHealth(maxHealth);
+        }
     }
 
     public String getName() {
@@ -87,6 +102,9 @@ public class Character implements IDamageable{
         return job;
     }
 
+    public void setHealth(double health) {
+        this.health = health;
+    }
 
     private String name;
     private Race race;
@@ -96,4 +114,5 @@ public class Character implements IDamageable{
     private Stat constitution;
     private Stat intelligence;
     private double health;
+    private double maxHealth;
 }

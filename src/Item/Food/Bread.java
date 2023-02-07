@@ -1,9 +1,7 @@
 package Item.Food;
 
-public class Bread {
-    private static final int power = 10;
-
+public class Bread extends Food{
     public Bread() {
-        super();
+        setPower(10);
     }
 }
