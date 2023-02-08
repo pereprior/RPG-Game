@@ -1,10 +1,10 @@
-package Item.Food;
+package Item.Potion;
 
 import Item.IConsumable;
 
-public abstract class Food implements IConsumable {
+public abstract class Potion implements IConsumable {
     public static void setPower(int power) {
-        Food.power = power;
+        Potion.power = power;
     }
     public int getPower() {
         return power;

@@ -4,11 +4,12 @@ import Character.Job.*;
 import Character.Race.*;
 import Character.Stat.*;
 import Item.Food.Food;
-import Item.Food.IConsumable;
+import Item.IConsumable;
+import Item.Potion.Potion;
 
-public class Character implements IDamageable{
+public class Characters implements IDamageable{
 
-    public Character(String name, Race race, Job job, Stat base){
+    public Characters(String name, Race race, Job job, Stat base){
         this.name=name;
         this.race=race;
         this.job=job;
@@ -57,9 +58,12 @@ public class Character implements IDamageable{
         maxHealth=health;
     }
 
-    public void consumes(Food food){
-        System.out.println(name + " consumed: " + food);
-        //heals(food);
+    public void consumes(IConsumable consumable){
+        if (consumable instanceof Food)
+            heals(((Food) consumable).getPower());
+
+        if (consumable instanceof Potion)
+            heals(((Potion) consumable).getPower());
     }
 
     @Override

@@ -1,8 +1,8 @@
-package Item.Food;
+package Item.Potion;
 import Character.Characters;
-public class Apple extends Food{
-    public Apple() {
-        setPower(5);
+public class HealingPotion extends Potion{
+    public HealingPotion() {
+        setPower(50);
     }
     @Override
     public void consumedBy(Characters character) {
