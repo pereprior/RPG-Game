@@ -98,6 +98,22 @@ public class Characters implements IDamageable{
         return name;
     }
 
+    public Stat getConstitution() {
+        return constitution;
+    }
+
+    public Stat getDexterity() {
+        return dexterity;
+    }
+
+    public Stat getIntelligence() {
+        return intelligence;
+    }
+
+    public Stat getStrength() {
+        return strength;
+    }
+
     public Race getRace() {
         return race;
     }

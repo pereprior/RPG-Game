@@ -14,7 +14,6 @@ class CharacterTest {
     @Test
     void testFood() {
         Food paella = new Paella();
-        Potion pocion = new HealingPotion();
         Stat stat = new Strength(5);
         Job job = new Homeless();
         Race race = new Human();
@@ -22,8 +21,18 @@ class CharacterTest {
         prueba.receivesDamage(30);
         prueba.consumes(paella);
         System.out.println("-----------------");
+    }
+
+    @Test
+    void TestPotion(){
+        Stat stat = new Strength(5);
+        Job job = new Homeless();
+        Race race = new Human();
+        Characters prueba = new Characters("Pere", race, job, stat);
+        Potion pocion = new HealingPotion();
         prueba.receivesDamage(30);
         prueba.consumes(pocion);
+        System.out.println("-----------------");
     }
 
     @Test

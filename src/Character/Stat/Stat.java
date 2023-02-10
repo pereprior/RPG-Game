@@ -13,12 +13,12 @@ public abstract class Stat {
         this.value = value;
     }
 
-    public void increase(){
-        value++;
+    public void increase(int boost){
+        value+=boost;
     }
 
-    public void decrease(){
-        value--;
+    public void decrease(int boost){
+        value-=boost;
     }
 
     @Override
